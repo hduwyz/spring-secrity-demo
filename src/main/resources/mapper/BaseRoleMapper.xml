@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmdi.fanuc.mapper.BaseRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cmdi.fanuc.mapper.model.BaseRole">
+        <id column="ID" property="id" />
+        <result column="ROLE_CODE" property="roleCode" />
+        <result column="ROLE_NAME" property="roleName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, ROLE_CODE, ROLE_NAME
+    </sql>
+
+    <!-- 根据用户id查询角色 -->
+    <select id="selectRolesByUserId" resultMap="BaseResultMap" parameterType="String">
+        SELECT br.* FROM base_role br LEFT JOIN base_user_role bur on br.ID = bur.ROLE_ID WHERE bur.USER_ID = #{userId}
+    </select>
+    <select id="selectRolesByMenuId" resultType="com.cmdi.fanuc.mapper.model.BaseRole"></select>
+
+</mapper>

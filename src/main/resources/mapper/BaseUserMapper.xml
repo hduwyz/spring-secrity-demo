@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmdi.fanuc.mapper.BaseUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cmdi.fanuc.mapper.model.BaseUser">
+        <id column="ID" property="id" />
+        <result column="USER_NAME" property="userName" />
+        <result column="USER_PASSWORD" property="userPassword" />
+        <result column="NIKE_NAME" property="nikeName" />
+        <result column="STATUS" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, USER_NAME, USER_PASSWORD, NIKE_NAME, STATUS
+    </sql>
+
+</mapper>

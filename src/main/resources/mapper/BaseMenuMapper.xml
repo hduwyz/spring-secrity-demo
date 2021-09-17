@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmdi.fanuc.mapper.BaseMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cmdi.fanuc.mapper.model.BaseMenu">
+        <id column="ID" property="id" />
+        <result column="MENU_URL" property="menuUrl" />
+        <result column="MENU_SEQ" property="menuSeq" />
+        <result column="MENU_PARENT_ID" property="menuParentId" />
+        <result column="MENU_NAME" property="menuName" />
+        <result column="MENU_ICON" property="menuIcon" />
+        <result column="MENU_ORDER" property="menuOrder" />
+        <result column="IS_LEAF" property="isLeaf" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, MENU_URL, MENU_SEQ, MENU_PARENT_ID, MENU_NAME, MENU_ICON, MENU_ORDER, IS_LEAF
+    </sql>
+
+    <select id="selectRootMenusByUserId" resultMap="BaseResultMap">
+        SELECT DISTINCT bm.* FROM base_menu bm LEFT JOIN base_role_menu brm ON bm.id = brm.MENU_ID
+                                               LEFT JOIN base_user_role bur ON brm.ROLE_ID = bur.ROLE_ID WHERE bur.USER_ID = #{userId} and bm.menu_parent_id IS NULL ORDER BY bm.MENU_ORDER
+    </select>
+
+</mapper>
